@@ -1,11 +1,14 @@
 import "../dist/scss/styles.scss";
 import Navbar from "../components/Navbar/Navbar";
+import Feature from "../components/Feature/Feature";
+
+import platformDashboard from "../images/hero-dashboard.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   return (
-    <div>
+    <div className="homepage">
       <Navbar />
       <div className="hero-container">
         <div className="content">
@@ -24,14 +27,22 @@ function App() {
         </div>
 
         <div className="content">
-          <div className="button">
+          <button className="button">
             <FontAwesomeIcon
               style={{ fontSize: 14, paddingRight: 10 }}
               icon={faArrowRightLong}
             />
-            Click here
-          </div>
+            Free trial
+          </button>
         </div>
+      </div>
+      <div className="hero-img">
+        <div className="content">
+          <img src={platformDashboard} alt="saas-platform-dashboard" />
+        </div>
+      </div>
+      <div className="content">
+        <Feature />
       </div>
     </div>
   );

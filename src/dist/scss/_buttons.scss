@@ -1,10 +1,9 @@
 @import "config";
 .button {
     align-items: center;
-    background-color: $primary-color;
-    background-image: linear-gradient(1deg, $primary-color, #00B4DB 99%);
+    background-image: linear-gradient( 1deg, $primary-color, lighten($primary-color, 5%) 99%);
     background-size: calc(100% + 20px) calc(100% + 20px);
-    border-radius: 10px;
+    border-radius: 5px;
     border-width: 0;
     box-shadow: none;
     box-sizing: border-box;
@@ -13,7 +12,7 @@
     display: inline-flex;
     font-family: $fonts;
     font-size: 20px;
-    height: 60px;
+    height: 56px;
     width: 250px;
     justify-content: center;
     line-height: 1.5;
@@ -29,7 +28,7 @@
 
 .button:active,
 .button:focus {
-    outline: none;
+    background-image: linear-gradient(1deg, $accent, darken($accent, 5%) 99%);
 }
 
 .button:hover {
@@ -37,5 +36,6 @@
 }
 
 .button:focus:not(:active) {
-    box-shadow: rgba(40, 170, 255, 0.25) 0 0 0 0.125em;
+    background-image: linear-gradient(1deg, $accent, darken($accent, 5%) 99%);
+    box-shadow: rgba(29, 219, 169, 0.25) 0 0 0 0.125em;
 }

@@ -14,11 +14,16 @@ div {
     margin: 0;
 }
 
+img {
+    height: auto;
+    width: 100%;
+}
+
 h1 {
     font-family: $fonts;
     font-size: 72px;
     font-weight: 900;
-    color: black;
+    color: $grey;
     padding: 0;
     margin: 0;
 }
@@ -44,6 +49,13 @@ ul {
     list-style-type: none;
 }
 
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    font-family: $fonts;
+    color: $primary-color;
+}
+
 .content {
     padding: 0;
     margin: 15px 0;
@@ -52,4 +64,21 @@ ul {
 .container {
     padding: 0;
     margin: 0;
+}
+
+%box {
+    margin: 10px 0;
+    font-family: $fonts;
+}
+
+.box-header {
+    @extend %box;
+    font-size: 16px;
+    color: $primary-color;
+}
+
+.box-content {
+    @extend %box;
+    font-size: 14px;
+    color: $grey;
 }
