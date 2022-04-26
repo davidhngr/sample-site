@@ -1,6 +1,7 @@
 @import "config";
 @import "utilities";
 @import "buttons";
+@import "section";
 .homepage {
     display: flex;
     flex-direction: column;
@@ -28,13 +29,12 @@
         text-transform: uppercase;
         letter-spacing: 2px;
     }
-}
-
-.hero-img {
-    display: flex;
-    align-items: center;
-    max-width: 1100%;
-    height: auto;
+    .disclaimer {
+        font-size: 16px;
+        font-weight: 300;
+        margin-top: 10px;
+        color: lighten($grey, 10%);
+    }
 }
 
 .navbar {
@@ -78,7 +78,7 @@
         max-width: 300px;
         display: inline;
         margin: 20px;
-        padding: 40px 40px;
+        padding: 40px;
     }
     .box-underline {
         background-color: $primary-color;

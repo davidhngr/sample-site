@@ -1,10 +1,12 @@
 import "../dist/scss/styles.scss";
 import Navbar from "../components/Navbar/Navbar";
-import Feature from "../components/Feature/Feature";
+import FeatureBox from "../components/FeatureBox/FeatureBox";
+import Section from "../components/Section/Section";
 
 import platformDashboard from "../images/hero-dashboard.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
+import { faCode } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   return (
@@ -34,15 +36,79 @@ function App() {
             />
             Free trial
           </button>
+          <div className="disclaimer">7 days free trial.</div>
         </div>
       </div>
+
       <div className="hero-img">
-        <div className="content">
-          <img src={platformDashboard} alt="saas-platform-dashboard" />
+        <img src={platformDashboard} alt="saas-platform-dashboard" />
+      </div>
+
+      <div className="content">
+        <div className="feature">
+          <FeatureBox
+            icon={faCode}
+            header="Lorem Ipsum"
+            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua."
+          />
+          <FeatureBox
+            icon={faCode}
+            header="Lorem Ipsum"
+            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua."
+          />
+          <FeatureBox
+            icon={faCode}
+            header="Lorem Ipsum"
+            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua."
+          />
+          <FeatureBox
+            icon={faCode}
+            header="Lorem Ipsum"
+            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua."
+          />
         </div>
       </div>
-      <div className="content">
-        <Feature />
+
+      <div className="section-left-align">
+        <Section
+          className="section-left"
+          header="Lorem ipsum dolor sit amet"
+          content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco."
+        >
+          <div className="section-cta">
+            Learn more
+            <FontAwesomeIcon
+              style={{ fontSize: 14, paddingLeft: 10 }}
+              icon={faArrowRightLong}
+            />
+          </div>
+        </Section>
+        <Section className="section-right">
+          <img src={platformDashboard} alt="saas" />
+        </Section>
+      </div>
+
+      <div className="section-right-align">
+        <Section className="section-left">
+          <img src={platformDashboard} alt="saas" />
+        </Section>
+        <Section
+          className="section-right"
+          header="Lorem ipsum dolor sit amet"
+          content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco."
+        >
+          <div className="section-cta">
+            Learn more
+            <FontAwesomeIcon
+              style={{ fontSize: 14, paddingLeft: 10 }}
+              icon={faArrowRightLong}
+            />
+          </div>
+        </Section>
       </div>
     </div>
   );
