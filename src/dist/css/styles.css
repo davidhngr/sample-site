@@ -94,6 +94,25 @@ ul {
   color: #405169;
 }
 
+.bubble {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  max-width: 1000px;
+}
+
+.bubble .bubble-left {
+  max-width: 60%;
+}
+
+.bubble .bubble-right {
+  font-size: 14px;
+  color: #463bfa;
+}
+
 .button {
   -webkit-box-align: center;
       -ms-flex-align: center;
