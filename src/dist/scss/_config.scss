@@ -5,4 +5,17 @@ $accent: rgb(29, 219, 169);
 $grey: rgb(64, 81, 105);
 $light-grey: rgb(230, 232, 235);
 $box-shadow: rgb(0 23 55 / 10%) 0px 8px 24px 0px;
+$box-shadow-light: rgb(0 23 55 / 5%) 0px 8px 24px 0px;
 $box-shadow-hover: rgb(0 23 55 / 20%) 0px 8px 24px 0px;
+@function set-text-color($color) {
+    @if(lightness($color) > 70) {
+        @return black;
+    }
+    @else {
+        @return white;
+    }
+}
+
+@mixin text-color($color) {
+    color: set-text-color($color);
+}

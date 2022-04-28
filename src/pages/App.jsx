@@ -1,18 +1,20 @@
 import "../dist/scss/styles.scss";
 import Navbar from "../components/Navbar/Navbar";
+import Footer from "../components/Footer/Footer";
 import FeatureBox from "../components/FeatureBox/FeatureBox";
 import Section from "../components/Section/Section";
+import Bubble from "../components/Bubble/Bubble";
+import Testemonial from "../components/Testemonial/Testemonial";
 
 import platformDashboard from "../images/hero-dashboard.png";
-import userAvatar from "../images/photo-1648406062026-88d6ab60c431.jpeg";
+import userAvatar from "../images/photo-1648406062026-88d6ab60c431.jpeg"
+;
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRight,
   faArrowRightLong,
+  faCode,
 } from "@fortawesome/free-solid-svg-icons";
-import { faCode } from "@fortawesome/free-solid-svg-icons";
-import Bubble from "../components/Bubble/Bubble";
-import Testemonial from "../components/Testemonial/Testemonial";
 
 function App() {
   return (
@@ -44,10 +46,12 @@ function App() {
           </button>
           <div className="disclaimer">7 days free trial.</div>
         </div>
-      </div>
 
-      <div className="hero-img">
-        <img src={platformDashboard} alt="saas-platform-dashboard" />
+        <img
+          className="hero-img"
+          src={platformDashboard}
+          alt="saas-platform-dashboard"
+        />
       </div>
 
       <div className="content">
@@ -176,11 +180,33 @@ function App() {
               avatar={userAvatar}
               name="John Doe"
               role="Entrepreneur"
-              message="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip"
+              message="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip."
             />
           </div>
         </div>
       </div>
+
+      <div className="cta-container">
+        <div className="cta">
+          <div className="cta-header-1">Lorem ipsum dolor sit amet</div>
+          <div className="cta-header-2">
+            Lorem ipsum dolor sit amet consectetur adipiscing elit sed do
+            eiusmod tempor
+          </div>
+
+          <button className="button">
+            <FontAwesomeIcon
+              style={{ fontSize: 14, paddingRight: 10 }}
+              icon={faArrowRightLong}
+            />
+            Free Trial
+          </button>
+          <div className="disclaimer">7 days free trial.</div>
+
+          <img src={platformDashboard} alt="dashboard" />
+        </div>
+      </div>
+      <Footer />
     </div>
   );
 }

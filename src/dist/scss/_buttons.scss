@@ -11,7 +11,7 @@
     cursor: pointer;
     display: inline-flex;
     font-family: $fonts;
-    font-size: 18px;
+    font-size: 16px;
     height: 56px;
     width: 250px;
     justify-content: center;
@@ -38,4 +38,73 @@
 .button:focus:not(:active) {
     background-image: linear-gradient(1deg, $accent, darken($accent, 5%) 99%);
     box-shadow: rgba(29, 219, 169, 0.25) 0 0 0 0.125em;
+}
+
+.button-small-outlined {
+    @include text-color(white);
+    align-items: center;
+    background-color: white;
+    border: 1px solid darken($light-grey, 5%);
+    border-radius: 5px;
+    box-shadow: $box-shadow-light;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: $fonts;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    height: 32px;
+    width: 64px;
+    justify-content: center;
+    line-height: 1;
+    padding: 6px 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.2s, background-position 0.2s;
+    user-select: none;
+    touch-action: manipulation;
+    vertical-align: top;
+    white-space: nowrap;
+    &:hover {
+        background-color: darken(white, 2.5%);
+    }
+    &:focus:not(:active) {
+        box-shadow: rgba(29, 219, 169, 0.25) 0 0 0 0.125em;
+    }
+}
+
+.button-small-filled {
+    @include text-color($primary-color);
+    align-items: center;
+    background-image: linear-gradient( 1deg, $primary-color, lighten($primary-color, 5%) 99%);
+    border: 1px solid transparent;
+    border-radius: 5px;
+    box-shadow: $box-shadow-light;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: $fonts;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    height: 32px;
+    min-width: 64px;
+    justify-content: center;
+    line-height: 1;
+    padding: 0 12px;
+    margin: 0 10px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.2s, background-position 0.2s;
+    user-select: none;
+    touch-action: manipulation;
+    vertical-align: top;
+    white-space: nowrap;
+    &:hover {
+        background-color: darken(white, 2.5%);
+    }
+    &:focus:not(:active) {
+        box-shadow: rgba(29, 219, 169, 0.25) 0 0 0 0.125em;
+    }
 }
