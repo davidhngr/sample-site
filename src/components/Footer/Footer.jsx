@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="logo">Logo</div>
 
         <div className="nav">
-          <ul className="nav-container">
+          <ul>
             <li>
               <a>Home</a>
             </li>
