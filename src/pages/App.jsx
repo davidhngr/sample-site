@@ -7,8 +7,7 @@ import Bubble from "../components/Bubble/Bubble";
 import Testemonial from "../components/Testemonial/Testemonial";
 
 import platformDashboard from "../images/hero-dashboard.png";
-import userAvatar from "../images/photo-1648406062026-88d6ab60c431.jpeg"
-;
+import userAvatar from "../images/photo-1648406062026-88d6ab60c431.jpeg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRight,
