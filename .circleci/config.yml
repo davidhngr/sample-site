@@ -1,0 +1,5 @@
+deployment:
+  production:
+    branch: master
+    commands:
+      - surge --project ./Users/davidheng/Desktop/sample-site/build --domain http://selective-bead.surge.sh/
