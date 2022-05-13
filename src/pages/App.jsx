@@ -55,30 +55,32 @@ function App() {
 
       <div className="content">
         <div className="feature">
-          <FeatureBox
-            icon={faCode}
-            header="Lorem Ipsum"
-            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+          <div className="feature-container">
+            <FeatureBox
+              icon={faCode}
+              header="Lorem Ipsum"
+              content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua."
-          />
-          <FeatureBox
-            icon={faCode}
-            header="Lorem Ipsum"
-            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+            />
+            <FeatureBox
+              icon={faCode}
+              header="Lorem Ipsum"
+              content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua."
-          />
-          <FeatureBox
-            icon={faCode}
-            header="Lorem Ipsum"
-            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+            />
+            <FeatureBox
+              icon={faCode}
+              header="Lorem Ipsum"
+              content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua."
-          />
-          <FeatureBox
-            icon={faCode}
-            header="Lorem Ipsum"
-            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+            />
+            <FeatureBox
+              icon={faCode}
+              header="Lorem Ipsum"
+              content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua."
-          />
+            />
+          </div>
         </div>
       </div>
 
@@ -134,18 +136,18 @@ function App() {
       </div>
 
       <div className="content">
-        <div className="testemonial-container">
-          <div className="testemonial-header">
-            <div className="testemonial-header-1">
+        <div className="testemonials-container">
+          <div className="testemonials-header">
+            <div className="testemonials-header-1">
               Lorem ipsum dolor sit amet
             </div>
-            <div className="testemonial-header-2">
+            <div className="testemonials-header-2">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor
             </div>
           </div>
 
-          <div className="testemonials">
+          <div className="testemonials-container">
             <Testemonial
               avatar={userAvatar}
               name="John Doe"
@@ -185,8 +187,8 @@ function App() {
         </div>
       </div>
 
-      <div className="cta-container">
-        <div className="cta">
+      <div className="cta">
+        <div className="cta-container">
           <div className="cta-header-1">Lorem ipsum dolor sit amet</div>
           <div className="cta-header-2">
             Lorem ipsum dolor sit amet consectetur adipiscing elit sed do

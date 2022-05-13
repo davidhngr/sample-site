@@ -1,7 +1,6 @@
 import * as React from "react";
 
-import Menu from "../Menu/Menu";
-import MenuItem from "../MenuItem/MenuItem";
+import { Menu, MenuItem } from "../Menu/Menu";
 
 import {
   faCodeBranch,
@@ -10,7 +9,30 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function Navbar() {
+  const [isMobile, setIsMobile] = React.useState(false);
+  const [toggle, setToggle] = React.useState(false);
   const [featureActive, setFeatureActive] = React.useState(false);
+  let resizeTimer;
+
+  const handleResize = () => {
+    if (window.innerWidth < 768) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  };
+
+  React.useEffect(() => {
+    window.addEventListener("resize", handleResize);
+  });
+
+  window.addEventListener("resize", () => {
+    document.body.classList.add("resize-animation-stopper");
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      document.body.classList.remove("resize-animation-stopper");
+    }, 10);
+  });
 
   const handleFeatureActive = (state) => {
     setFeatureActive(state);
@@ -21,43 +43,38 @@ export default function Navbar() {
       <div className="container">
         <div className="logo">Logo</div>
 
-        <ul>
-          <li>
-            <a onClick={() => setFeatureActive((prev) => !prev)}>
-              <div className="label">Features</div>
+        <div className="nav">
+          <ul
+            className={`${!isMobile} ${"none"} : ${toggle ? "open" : "close"}`}
+          >
+            <Menu
+              open={featureActive}
+              handleOpen={handleFeatureActive}
+              label="Features"
+              labelOnClick={() => setFeatureActive((prevState) => !prevState)}
+              toggle={featureActive ? "toggle-menu-open" : "toggle-menu"}
+              toggleOnClick={(e) => {
+                e.stopPropagation();
+                setFeatureActive((prevState) => !prevState);
+              }}
+            >
+              <MenuItem icon={faCodeBranch} label="Lorem Ipsum" />
+              <MenuItem icon={faCloudArrowUp} label="Lorem Ipsum" />
+              <MenuItem icon={faServer} label="Lorem Ipsum" />
+            </Menu>
 
-              <Menu open={featureActive} handleOpen={handleFeatureActive}>
-                <MenuItem icon={faCodeBranch} label="Lorem Ipsum" />
-
-                <MenuItem icon={faCloudArrowUp} label="Lorem Ipsum" />
-
-                <MenuItem icon={faServer} label="Lorem Ipsum" />
-              </Menu>
-            </a>
-          </li>
-
-          <li>
-            <a>
-              <div className="label">About</div>
-            </a>
-          </li>
-
-          <li>
-            <a>
-              <div className="label">Pricing</div>
-            </a>
-          </li>
-
-          <li>
-            <a>
-              <div className="label">Contact</div>
-            </a>
-          </li>
-        </ul>
+            <Menu label="About"></Menu>
+            <Menu label="Pricing"></Menu>
+            <Menu label="Contact"></Menu>
+          </ul>
+        </div>
 
         <div className="button-container">
           <button className="button-small-outlined">Login</button>
           <button className="button-small-filled">Free trial</button>
+        </div>
+        <div className="toggle" onClick={() => setToggle((prev) => !prev)}>
+          <div className={toggle ? "hamburger-open" : "hamburger"} />
         </div>
       </div>
     </nav>
