@@ -17,13 +17,13 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: yarn install
+      - run: npm install
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       # run placeholder test
-      - run: yarn test
+      - run: npm test
   # Deploy with Surge task
   deploy:
     docker:
@@ -31,7 +31,7 @@ jobs:
     steps:
       - checkout
       - run: npm install surge
-      - run: ./node_modules/surge/lib/cli.js --project ./ --domain selective-bead.surge.sh
+      - run: ./node_modules/surge/lib/cli.js --project ./build --domain selective-bead.surge.sh
 workflows:
   version: 2
   build-and-deploy:
