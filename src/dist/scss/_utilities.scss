@@ -102,9 +102,6 @@ ul {
     justify-content: center;
     width: 100vw;
     transition: box-shadow 300ms;
-    &:hover {
-        box-shadow: $box-shadow-hover;
-    }
     &-container {
         display: flex;
         justify-content: space-between;
@@ -116,6 +113,9 @@ ul {
         // margin: auto;
         border-radius: 10px;
         box-shadow: $box-shadow;
+        &:hover {
+            box-shadow: $box-shadow-hover;
+        }
     }
     &-left {
         font-size: 14px;
