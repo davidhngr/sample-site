@@ -1,6 +1,6 @@
 import * as React from "react";
 import "../dist/scss/styles.scss";
-import Navbar from "../components/Navbar/Navbar";
+
 import Footer from "../components/Footer/Footer";
 import FeatureBox from "../components/FeatureBox/FeatureBox";
 import Section from "../components/Section/Section";
@@ -17,51 +17,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
-  const Cookie = () => {
-    const [consent, setConsent] = React.useState(null);
-
-    React.useEffect(() => {
-      setConsent(localStorage.getItem("consent"));
-    }, [consent]);
-
-    const acceptCookie = () => {
-      localStorage.setItem("consent", "true");
-      setConsent(localStorage.getItem("consent"));
-    };
-
-    const declineCookie = () => {
-      localStorage.setItem("consent", "false");
-      setConsent(localStorage.getItem("consent"));
-    };
-
-    if (consent === null) {
-      return (
-        <div className="cookie">
-          <div className="cookie-container">
-            <div className="cookie-header">Cookie & Privacy</div>
-            <div className="cookie-body">
-              This website uses cookies to ensure you get the best experience on
-              our website.
-            </div>
-            <div className="cookie-cta">
-              <div className="button" onClick={acceptCookie}>
-                Accept
-              </div>
-              <div className="button" onClick={declineCookie}>
-                Decline
-              </div>
-            </div>
-          </div>
-        </div>
-      );
-    }
-  };
-
   return (
     <div className="homepage">
-      <Cookie />
-      <Navbar />
-
       <div className="hero-container">
         <div className="content">
           <h4>Lorem ipsum dolor sit amet</h4>

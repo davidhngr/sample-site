@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { Link } from "react-router-dom";
 import { Menu, MenuItem } from "../Menu/Menu";
 
 import {
@@ -41,7 +42,9 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="container">
-        <div className="logo">Logo</div>
+        <Link className="logo" to="/">
+          Logo
+        </Link>
 
         <div className="nav">
           <ul
@@ -63,7 +66,9 @@ export default function Navbar() {
               <MenuItem icon={faServer} label="Lorem Ipsum" />
             </Menu>
 
-            <Menu label="About"></Menu>
+            <Link style={{ textDecoration: "none" }} to="/about">
+              <Menu label="About"></Menu>
+            </Link>
             <Menu label="Pricing"></Menu>
             <Menu label="Contact"></Menu>
           </ul>

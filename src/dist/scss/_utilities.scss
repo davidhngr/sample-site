@@ -145,6 +145,7 @@ ul {
     background: white;
     box-shadow: rgb(0 23 55 / 30%) 0px 8px 24px 0px;
     border-radius: 8px;
+    z-index: 99;
     animation: fadeInDown 500ms ease-in both;
     @include breakpoint(sm) {
         align-self: center;
