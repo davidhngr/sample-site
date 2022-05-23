@@ -1,13 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { AppWithApollo } from "./lib/provider";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar/Navbar";
-import Footer from "./components/Footer/Footer";
 
 import App from "./pages/App";
 import About from "./pages/About";
+import Blog from "./pages/Blog";
 import reportWebVitals from "./reportWebVitals";
 
 const Cookie = () => {
@@ -53,16 +54,19 @@ const Cookie = () => {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Navbar />
-      <Cookie />
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/pricing" element={null} />
-        <Route path="/contact" element={null} />
-      </Routes>
-    </BrowserRouter>
+    <AppWithApollo>
+      <BrowserRouter>
+        <Navbar />
+        <Cookie />
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/pricing" element={null} />
+          <Route path="/contact" element={null} />
+          <Route path="/blog" element={<Blog />} />
+        </Routes>
+      </BrowserRouter>
+    </AppWithApollo>
   </React.StrictMode>
 );
 
