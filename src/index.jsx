@@ -4,11 +4,10 @@ import { AppWithApollo } from "./lib/provider";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Navbar from "./components/Navbar/Navbar";
-
 import App from "./pages/App";
 import About from "./pages/About";
 import Blog from "./pages/Blog";
+import Login from "./pages/Login";
 import reportWebVitals from "./reportWebVitals";
 
 const Cookie = () => {
@@ -56,14 +55,14 @@ root.render(
   <React.StrictMode>
     <AppWithApollo>
       <BrowserRouter>
-        <Navbar />
         <Cookie />
         <Routes>
-          <Route path="/" element={<App />} />
+          <Route index element={<App />} />
           <Route path="/about" element={<About />} />
           <Route path="/pricing" element={null} />
           <Route path="/contact" element={null} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </AppWithApollo>

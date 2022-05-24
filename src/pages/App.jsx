@@ -1,6 +1,7 @@
 import * as React from "react";
 import "../dist/scss/styles.scss";
 
+import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import FeatureBox from "../components/FeatureBox/FeatureBox";
 import Section from "../components/Section/Section";
@@ -19,6 +20,7 @@ import {
 function App() {
   return (
     <div className="homepage">
+      <Navbar />
       <div className="hero-container">
         <div className="content">
           <h4>Lorem ipsum dolor sit amet</h4>
