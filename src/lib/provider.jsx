@@ -34,4 +34,4 @@ const AppWithApollo = ({ children }) => (
   <ApolloProvider client={client}>{children}</ApolloProvider>
 );
 
-export { AppWithApollo };
+export { app, AppWithApollo };

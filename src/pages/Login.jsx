@@ -1,6 +1,10 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { AuthContext } from "../lib/AuthProvider";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -11,7 +15,61 @@ const loginSchema = Yup.object().shape({
     .required("Password is required"),
 });
 
+function TextInput({ inputLabel, name, html, isPassword }) {
+  const element = React.useRef(null);
+  const elementLabel = React.useRef(null);
+  let elementField = React.useRef(null);
+
+  const [isVisible, setIsVisible] = React.useState(false);
+  let type;
+
+  if (isVisible && html === "password") {
+    type = "text";
+  } else if (html !== "password") {
+    type = "text";
+  } else {
+    type = "password";
+  }
+
+  React.useEffect(() => {
+    document.addEventListener("mousedown", (event) => {
+      if (element.current.contains(event.target)) {
+        elementLabel.current.className = "input-label-active";
+      } else {
+        elementLabel.current.className = "input-label-inactive";
+      }
+
+      if (elementField.value.length !== 0) {
+        elementLabel.current.className = "input-label-active";
+      }
+    });
+  });
+
+  return (
+    <div className="input" ref={element}>
+      <label className="input-label-inactive" htmlFor={html} ref={elementLabel}>
+        {inputLabel}
+      </label>
+      {html === "password" && (
+        <FontAwesomeIcon
+          className="secure-text"
+          icon={isVisible ? faEye : faEyeSlash}
+          onClick={() => setIsVisible((prev) => !prev)}
+        />
+      )}
+      <input
+        className="input-field"
+        name={name}
+        type={type}
+        ref={(value) => (elementField = value)}
+      />
+    </div>
+  );
+}
+
 export default function Login() {
+  const { logIn } = React.useContext(AuthContext);
+
   return (
     <div className="login">
       <div className="login-container">
@@ -21,13 +79,27 @@ export default function Login() {
             initialValues={{ email: "", password: "" }}
             validateOnMount
             validationSchema={loginSchema}
+            onSubmit={(values, actions) => {
+              logIn(values.email, values.password).then((result) =>
+                console.log(result).catch((error) => console.log(error))
+              );
+            }}
           >
             {({ handleChange, values, handleSubmit, errors, touched }) => (
               <Form>
-                <div className="input" onMouseDown={}>
-                  <label className="input-label-active" htmlFor="email" id="email-label">Email</label>
-                  <Field className="input-field" name="email" type="text" />
-                </div>
+                <TextInput inputLabel="Email" name="email" html="email" />
+                <TextInput
+                  inputLabel="Password"
+                  name="password"
+                  html="password"
+                />
+                <button
+                  className="button-filled"
+                  onClick={handleSubmit}
+                  type="submit"
+                >
+                  Login
+                </button>
               </Form>
             )}
           </Formik>

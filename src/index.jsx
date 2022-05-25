@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { AppWithApollo } from "./lib/provider";
+import {AuthProvider} from "./lib/AuthProvider";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -54,17 +55,19 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <AppWithApollo>
-      <BrowserRouter>
-        <Cookie />
-        <Routes>
-          <Route index element={<App />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/pricing" element={null} />
-          <Route path="/contact" element={null} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <Cookie />
+          <Routes>
+            <Route index element={<App />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/pricing" element={null} />
+            <Route path="/contact" element={null} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </AppWithApollo>
   </React.StrictMode>
 );
