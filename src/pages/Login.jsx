@@ -15,7 +15,7 @@ const loginSchema = Yup.object().shape({
     .required("Password is required"),
 });
 
-function TextInput({ inputLabel, name, html, isPassword }) {
+function TextInput({ inputLabel, name, html, value, onChange, handleBlur }) {
   const element = React.useRef(null);
   const elementLabel = React.useRef(null);
   let elementField = React.useRef(null);
@@ -39,7 +39,7 @@ function TextInput({ inputLabel, name, html, isPassword }) {
         elementLabel.current.className = "input-label-inactive";
       }
 
-      if (elementField.value.length !== 0) {
+      if (elementField && elementField.value.length !== 0) {
         elementLabel.current.className = "input-label-active";
       }
     });
@@ -62,6 +62,9 @@ function TextInput({ inputLabel, name, html, isPassword }) {
         name={name}
         type={type}
         ref={(value) => (elementField = value)}
+        value={value}
+        onChange={onChange}
+        handleBlur={handleBlur}
       />
     </div>
   );
@@ -78,29 +81,40 @@ export default function Login() {
           <Formik
             initialValues={{ email: "", password: "" }}
             validateOnMount
-            validationSchema={loginSchema}
+            // validationSchema={loginSchema}
             onSubmit={(values, actions) => {
-              logIn(values.email, values.password).then((result) =>
-                console.log(result).catch((error) => console.log(error))
-              );
+              logIn(values.email, values.password);
+              // console.log("email: ", values.email);
+              // console.log("password: ", values.password);
             }}
           >
-            {({ handleChange, values, handleSubmit, errors, touched }) => (
-              <Form>
-                <TextInput inputLabel="Email" name="email" html="email" />
+            {({
+              values,
+              errors,
+              touched,
+              handleChange,
+              handleSubmit,
+              handleBlur,
+            }) => (
+              <form onSubmit={handleSubmit}>
+                <TextInput
+                  inputLabel="Email"
+                  name="email"
+                  html="email"
+                  value={values.email}
+                  onChange={handleChange}
+                  handleBlur={handleBlur}
+                />
                 <TextInput
                   inputLabel="Password"
                   name="password"
                   html="password"
+                  values={values.password}
+                  onChange={handleChange}
+                  handleBlur={handleBlur}
                 />
-                <button
-                  className="button-filled"
-                  onClick={handleSubmit}
-                  type="submit"
-                >
-                  Login
-                </button>
-              </Form>
+                <button className="button-filled">Login</button>
+              </form>
             )}
           </Formik>
         </div>
