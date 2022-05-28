@@ -8,18 +8,16 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
-    .email("Invalid Email Address")
+    .email("Please enter a valid email address")
     .required("Email is required"),
-  password: Yup.string()
-    .min(8, "Password must be 8 characters or longer")
-    .required("Password is required"),
+  // password: Yup.string()
+  //   .min(8, "Password must be 8 characters or longer")
+  //   .required("Password is required"),
 });
 
-function TextInput({ inputLabel, name, html, value, onChange, handleBlur }) {
-  const element = React.useRef(null);
-  const elementLabel = React.useRef(null);
+function TextInput({ inputLabel, html, children, ...rest }) {
   let elementField = React.useRef(null);
-
+  const [active, setActive] = React.useState(false);
   const [isVisible, setIsVisible] = React.useState(false);
   let type;
 
@@ -32,22 +30,17 @@ function TextInput({ inputLabel, name, html, value, onChange, handleBlur }) {
   }
 
   React.useEffect(() => {
-    document.addEventListener("mousedown", (event) => {
-      if (element.current.contains(event.target)) {
-        elementLabel.current.className = "input-label-active";
-      } else {
-        elementLabel.current.className = "input-label-inactive";
-      }
-
-      if (elementField && elementField.value.length !== 0) {
-        elementLabel.current.className = "input-label-active";
-      }
-    });
+    if (elementField && elementField.value.length !== 0) {
+      setActive(true);
+    }
   });
 
   return (
-    <div className="input" ref={element}>
-      <label className="input-label-inactive" htmlFor={html} ref={elementLabel}>
+    <div className="input">
+      <label
+        className={active ? "input-label-active" : "input-label-inactive"}
+        htmlFor={html}
+      >
         {inputLabel}
       </label>
       {html === "password" && (
@@ -59,13 +52,13 @@ function TextInput({ inputLabel, name, html, value, onChange, handleBlur }) {
       )}
       <input
         className="input-field"
-        name={name}
         type={type}
+        onFocus={() => setActive(true)}
+        onBlur={() => setActive(false)}
         ref={(value) => (elementField = value)}
-        value={value}
-        onChange={onChange}
-        handleBlur={handleBlur}
+        {...rest}
       />
+      {children}
     </div>
   );
 }
@@ -81,21 +74,14 @@ export default function Login() {
           <Formik
             initialValues={{ email: "", password: "" }}
             validateOnMount
-            // validationSchema={loginSchema}
+            validationSchema={loginSchema}
             onSubmit={(values, actions) => {
               logIn(values.email, values.password);
               // console.log("email: ", values.email);
               // console.log("password: ", values.password);
             }}
           >
-            {({
-              values,
-              errors,
-              touched,
-              handleChange,
-              handleSubmit,
-              handleBlur,
-            }) => (
+            {({ values, errors, touched, handleChange, handleSubmit }) => (
               <form onSubmit={handleSubmit}>
                 <TextInput
                   inputLabel="Email"
@@ -103,17 +89,24 @@ export default function Login() {
                   html="email"
                   value={values.email}
                   onChange={handleChange}
-                  handleBlur={handleBlur}
-                />
+                >
+                  {errors.email && touched.email && (
+                    <div className="error-text">{errors.email}</div>
+                  )}
+                </TextInput>
                 <TextInput
                   inputLabel="Password"
                   name="password"
                   html="password"
                   values={values.password}
                   onChange={handleChange}
-                  handleBlur={handleBlur}
                 />
-                <button className="button-filled">Login</button>
+                {errors.invalidCredentials && (
+                  <div className="error-text">{errors.invalidCredentials}</div>
+                )}
+                <button className="button" type="submit">
+                  Login
+                </button>
               </form>
             )}
           </Formik>
