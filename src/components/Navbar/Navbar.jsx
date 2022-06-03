@@ -1,4 +1,5 @@
-import * as React from "react";
+import React from "react";
+import { AuthContext } from "../../lib/AuthProvider";
 
 import { Link } from "react-router-dom";
 import { Menu, MenuItem } from "../Menu/Menu";
@@ -14,6 +15,8 @@ export default function Navbar() {
   const [toggle, setToggle] = React.useState(false);
   const [featureActive, setFeatureActive] = React.useState(false);
   let resizeTimer;
+
+  const { auth, logOut } = React.useContext(AuthContext);
 
   const handleResize = () => {
     if (window.innerWidth < 768) {
@@ -75,8 +78,25 @@ export default function Navbar() {
         </div>
 
         <div className="button-container">
-          <button className="button-small-outlined">Login</button>
-          <button className="button-small-filled">Free trial</button>
+          {!auth && (
+            <>
+              <Link style={{ textDecoration: "none" }} to="/login">
+                <button className="button-small-outlined">Login</button>
+              </Link>
+
+              <button className="button-small-filled">Free trial</button>
+            </>
+          )}
+          {auth && (
+            <>
+              <button
+                className="button-small-outlined"
+                onClick={() => logOut()}
+              >
+                Logout
+              </button>
+            </>
+          )}
         </div>
         <div className="toggle" onClick={() => setToggle((prev) => !prev)}>
           <div className={toggle ? "hamburger-open" : "hamburger"} />
