@@ -1,13 +1,30 @@
 import gql from "graphql-tag";
 
-const ALL_BLOGS = gql `
-    query AllBlogs {
-        blogs {
+export const ALL_USERS = gql `
+    query AllUsers {
+        users {
             _id
-            title
-            description
+            id
+            data {
+                email
+            }
         }
     }
 `
 
-export { ALL_BLOGS };
+export const ALL_BLOGS = gql `
+    query AllBlogs {
+        blogs {
+            _id
+            author {
+                id
+                data {
+                    email
+                }
+            }
+            description
+            image
+            title
+        }
+    }
+`

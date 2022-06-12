@@ -85,7 +85,7 @@
     }
 }
 
-.blog {
+.blogs {
     @extend %layout;
 
     &-container {
@@ -94,6 +94,17 @@
         align-items: center;
         height: 100vh;
         width: 100vw;
+
+        .blog {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            height: 400px;
+            width: 300px;
+            padding: 20px;
+            box-shadow: $box-shadow;
+        }
     }
 }
 

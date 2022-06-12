@@ -72,7 +72,9 @@ export default function Navbar() {
             <Link style={{ textDecoration: "none" }} to="/about">
               <Menu label="About"></Menu>
             </Link>
-            <Menu label="Pricing"></Menu>
+            <Link style={{ textDecoration: "none" }} to="/blog">
+              <Menu label="Blog"></Menu>
+            </Link>
             <Menu label="Contact"></Menu>
           </ul>
         </div>
