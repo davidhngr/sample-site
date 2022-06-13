@@ -37,17 +37,35 @@ export default function Blog() {
 
   const Render = () => {
     if (blog && blog.length > 0) {
-      return blog.map((item, index) => (
-        <div className="blog" key={item._id}>
-          <div className="blog-description">
-            Author: {item.author.data.email}
-          </div>
+      return blog.map((item, index) => {
+        const rawDescription = item.description.substring(0, 250).replace(/,\s*$/, "").trim();
+        let description;
 
-          <img src={item.image} alt="blog-image" />
-          <div className="blog-title">{item.title}</div>
-          <div className="blog-description">{item.description}</div>
-        </div>
-      ));
+        if (rawDescription[rawDescription.length - 1] === ".") {
+          description = rawDescription.slice(0, -1)
+        } else {
+          description = rawDescription;
+        }
+
+        return (
+          <div className="blog" key={item._id}>
+            <div className="blog-container">
+              <div className="image-container">
+                <img src={item.image} alt="blog-image" />
+              </div>
+
+              <div className="content-container">
+                <div className="author">
+                  Posted by: {item.author.data.email}
+                </div>
+
+                <div className="title">{item.title}</div>
+                <div className="description">{description}...</div>
+              </div>
+            </div>
+          </div>
+        );
+      });
     }
   };
 
@@ -55,6 +73,7 @@ export default function Blog() {
     <div className="blogs">
       <Navbar />
       <div className="blogs-container">
+        <h1>Blog</h1>
         {loading && <div>loading...</div>}
         {!loading && <Render />}
       </div>
