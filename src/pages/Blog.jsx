@@ -6,34 +6,57 @@ import { useQuery, useMutation } from "@apollo/client";
 import { ALL_BLOGS } from "../lib/graphql/queries";
 
 export default function Blog() {
-  const { loading, error, data } = useQuery(ALL_BLOGS);
+  const { data, error, networkStatus, refetch } = useQuery(ALL_BLOGS, {
+    notifyOnNetworkStatusChange: true,
+  });
   const [blog, setBlog] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    if (!loading && data) {
-      setBlog(data.blogs);
-    }
-  }, [data]);
+    fetchData();
+  }, [networkStatus]);
 
-  console.log(blog);
+  const fetchData = () => {
+    switch (networkStatus) {
+      case 4:
+        setLoading(true);
+        break;
+      case 7:
+        setBlog(data?.blogs);
+        setLoading(false);
+        break;
+      case 8:
+        refetch();
+        // console.log(error);
+        break;
+    }
+  };
+
+  // console.log(blog);
+  // console.log(networkStatus);
+
+  const Render = () => {
+    if (blog && blog.length > 0) {
+      return blog.map((item, index) => (
+        <div className="blog" key={item._id}>
+          <div className="blog-description">
+            Author: {item.author.data.email}
+          </div>
+
+          <img src={item.image} alt="blog-image" />
+          <div className="blog-title">{item.title}</div>
+          <div className="blog-description">{item.description}</div>
+        </div>
+      ));
+    }
+  };
 
   return (
     <div className="blogs">
       <Navbar />
       <div className="blogs-container">
-        {loading && <h2>loading...</h2>}
-        {error && <h2>failed query: {error}</h2>}
-        {!loading &&
-          blog &&
-          blog.map((item, index) => (
-            <div className="blog" key={item._id}>
-              <div className="blog-title">{item.title}</div>
-              <div className="blog-description">{item.description}</div>
-              <div className="blog-description">
-                Author: {item.author.data.email}
-              </div>
-            </div>
-          ))}
+        {loading && <div>loading...</div>}
+        {!loading && <Render />}
       </div>
       <Footer />
     </div>
