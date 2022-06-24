@@ -9,6 +9,7 @@ import Home from "./Home";
 import About from "./About";
 import Blog from "./Blog";
 import Login from "./Login";
+import Account from "./Account";
 
 const Cookie = () => {
   const [consent, setConsent] = React.useState(null);
@@ -65,6 +66,7 @@ function App() {
             <Route path="/contact" element={null} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/account" element={<Account />} />
           </Routes>
         </BrowserRouter>
       </AppWithApollo>

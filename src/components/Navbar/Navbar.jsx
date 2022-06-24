@@ -3,20 +3,23 @@ import { AuthContext } from "../../lib/AuthProvider";
 
 import { Link } from "react-router-dom";
 import { Menu, MenuItem } from "../Menu/Menu";
+import { AccountMenu } from "../AccountMenu/AccountMenu";
 
 import {
   faCodeBranch,
   faCloudArrowUp,
   faServer,
+  faRightFromBracket
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function Navbar() {
   const [isMobile, setIsMobile] = React.useState(false);
   const [toggle, setToggle] = React.useState(false);
   const [featureActive, setFeatureActive] = React.useState(false);
+  const [profileActive, setProfileActive] = React.useState(false);
   let resizeTimer;
 
-  const { auth, logOut } = React.useContext(AuthContext);
+  const { auth, userData, logOut } = React.useContext(AuthContext);
 
   const handleResize = () => {
     if (window.innerWidth < 768) {
@@ -40,6 +43,10 @@ export default function Navbar() {
 
   const handleFeatureActive = (state) => {
     setFeatureActive(state);
+  };
+
+  const handleProfileActive = (state) => {
+    setProfileActive(state);
   };
 
   return (
@@ -72,14 +79,16 @@ export default function Navbar() {
             <Link style={{ textDecoration: "none" }} to="/about">
               <Menu label="About"></Menu>
             </Link>
+
             <Link style={{ textDecoration: "none" }} to="/blog">
               <Menu label="Blog"></Menu>
             </Link>
+            
             <Menu label="Contact"></Menu>
           </ul>
         </div>
 
-        <div className="button-container">
+        <div className="auth-container">
           {!auth && (
             <>
               <Link style={{ textDecoration: "none" }} to="/login">
@@ -89,15 +98,19 @@ export default function Navbar() {
               <button className="button-small-filled">Free trial</button>
             </>
           )}
-          {auth && (
-            <>
-              <button
-                className="button-small-outlined"
-                onClick={() => logOut()}
-              >
-                Logout
-              </button>
-            </>
+          {auth && !userData && (
+            <div>loading...</div>
+          )}
+          {auth && userData && (
+            <AccountMenu
+              avatar={userData?.avatar}
+              profileName={userData?.name}
+              open={profileActive}
+              handleOpen={handleProfileActive}
+              onClick={() => setProfileActive((prev) => !prev)}
+            >
+              <MenuItem icon={faRightFromBracket} label="Log Out" onClick={() => logOut()} />
+            </AccountMenu>
           )}
         </div>
         <div className="toggle" onClick={() => setToggle((prev) => !prev)}>

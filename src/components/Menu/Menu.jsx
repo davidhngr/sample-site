@@ -10,13 +10,15 @@ function Menu({
   toggleOnClick,
   children,
 }) {
-  const ref = React.useRef(null);
+  const menuRef = React.useRef(null);
+  const tabRef = React.useRef(null);
 
   React.useEffect(() => {
     function handleClickOutside(event) {
       if (
-        ref.current &&
-        !ref.current.contains(event.target) &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target) &&
+        !tabRef.current.contains(event.target) &&
         window.innerWidth > 768
       ) {
         handleOpen(false);
@@ -27,19 +29,19 @@ function Menu({
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [ref]);
+  }, [menuRef]);
 
   return (
     <li>
       <a>
-        <div className="label" onClick={labelOnClick}>
+        <div className="label" onClick={labelOnClick} ref={tabRef}>
           {label}
           {window.innerWidth < 768 && (
             <div className={toggle} onClick={toggleOnClick} />
           )}
         </div>
         {open && (
-          <div className="menu" ref={ref}>
+          <div className="menu" ref={menuRef}>
             {children}
           </div>
         )}
@@ -48,9 +50,9 @@ function Menu({
   );
 }
 
-function MenuItem({ icon, label }) {
+function MenuItem({ icon, label, ...rest }) {
   return (
-    <div className="menu-item">
+    <div className="menu-item" {...rest}>
       <FontAwesomeIcon style={{ width: 20, padding: 20 }} icon={icon} />
       {label}
     </div>

@@ -1,0 +1,115 @@
+@import "config";
+
+.account {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    overflow: hidden;
+    min-width: 100%;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+
+    %menu-layout {
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &-container {
+        display: flex;
+        height: 100vh;
+        width: 80vw;
+
+        .account-sidebar {
+            @extend %menu-layout;
+            height: 100vh;
+            width: 15%;
+
+            &-container {
+                height: 100%;
+                width: 100%;
+                padding: 20px;
+                background-color: white;
+                border-right: 1px solid $light-grey;
+                box-shadow: $box-shadow;
+
+            }
+        }
+
+        .account-menu-info {
+            @extend %menu-layout;
+            left: 15%;
+            width: 85%;
+            height: 15%;
+
+            &-container {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                height: 100%;
+                width: 100%;
+                padding: 20px;
+                border-bottom: 1px solid $light-grey;
+                background-color: white;
+
+                &-header {
+                    font-size: 20px;
+                }
+            }
+        }
+
+        .account-settings {
+            @extend %menu-layout;
+            overflow: auto;
+            top: 15%;
+            left: 15%;
+            height: 85%;
+            width: 85%;
+            padding: 20px 0;
+            background-color: rgb(242, 243, 245);
+
+            &-container {
+                position: relative;
+                height: auto;
+                width: 85%;
+                background-color: white;
+                border-radius: 10px;
+                box-shadow: $box-shadow;
+
+                .profile-info {
+                    padding: 40px;
+
+                    .profile-image {
+                        display: flex;
+                        align-items: center;
+                        margin: 20px 0;
+
+                        .avatar {
+                            height: 75px;
+                            width: 75px;
+                            background-color: rgba(0, 0, 0, 0.1);
+                            border-radius: 100px;
+                            border: 1px solid rgba(0, 0, 0, 0.1);
+                            object-fit: cover;
+                        }
+
+                        .input {
+                            font-size: 20px;
+                            margin: 0 20px;
+                        }
+
+                        .button {
+                            height: 40px;
+                            width: 140px;
+                            font-size: 16px;
+                            margin: 0 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

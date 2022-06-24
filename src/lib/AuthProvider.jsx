@@ -2,7 +2,12 @@ import React from "react";
 import * as Realm from "realm-web";
 import { app } from "./AppProvider";
 
-import { setCookie, getCookie, getRemember, encryptText } from "../utils/helpers";
+import {
+  setCookie,
+  getCookie,
+  getRemember,
+  encryptText,
+} from "../utils/helpers";
 
 if (!getCookie("email") && !getCookie("password")) {
   setCookie("", "");
@@ -12,20 +17,28 @@ export const AuthContext = React.createContext();
 
 export function AuthProvider({ children }) {
   const [loading, setLoading] = React.useState(false);
-  const [auth, setAuth] = React.useState(null);
+  const [auth, setAuth] = React.useState(app.currentUser);
   const [error, setError] = React.useState();
   const [remember, setRemember] = React.useState(getRemember());
+  const [userData, setUserData] = React.useState();
 
   React.useEffect(() => {
-    const user = app.currentUser;
-    // console.log(auth)
-
-    if (user) {
-      setAuth(true);
-    } else {
-      setAuth(false);
+    if (auth) {
+      getUserData();
     }
   }, [auth]);
+
+  const getUserData = async () => {
+    const db = app.currentUser
+      .mongoClient("mongodb-atlas")
+      .db("Sample-site")
+      .collection("User");
+
+    const data = await db.findOne({ id: app.currentUser.id });
+
+    setUserData(data);
+    // console.log(data);
+  };
 
   return (
     <AuthContext.Provider
@@ -36,16 +49,20 @@ export function AuthProvider({ children }) {
         error,
         remember,
         setRemember,
+        userData,
         logIn: async (email, password) => {
           try {
             await app
               .logIn(Realm.Credentials.emailPassword(email, password))
               .then((success) => {
-                console.log(success);
-                setAuth(true);
+                // console.log(success);
+                setAuth(app.currentUser);
+                setError();
 
                 if (remember) {
                   setCookie(encryptText(email), encryptText(password));
+                } else {
+                  setCookie("", "");
                 }
               });
           } catch (error) {
@@ -61,6 +78,7 @@ export function AuthProvider({ children }) {
             await app.currentUser.logOut().then((success) => {
               setAuth(false);
               setLoading(false);
+              setUserData();
             });
           } catch (error) {
             console.log(error);
