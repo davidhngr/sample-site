@@ -104,7 +104,7 @@ export default function Navbar() {
           {auth && userData && (
             <AccountMenu
               avatar={userData?.avatar}
-              profileName={userData?.name}
+              profileName={userData?.fullname}
               open={profileActive}
               handleOpen={handleProfileActive}
               onClick={() => setProfileActive((prev) => !prev)}

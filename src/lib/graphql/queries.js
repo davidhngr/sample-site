@@ -1,13 +1,18 @@
 import gql from "graphql-tag";
 
-export const ALL_USERS = gql `
-    query AllUsers {
-        users {
+export const CURRENT_USER = gql `
+    query ($id: String!) {
+        user(query: { id: $id }) {
             _id
             id
+            avatar
+            fullname
+            phone
+            location
             data {
                 email
             }
+            created
         }
     }
 `
